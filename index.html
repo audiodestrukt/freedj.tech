@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>freedj — open-source DJ decks</title>
+  <meta name="description" content="freedj: open-source DJ decks. A software CDJ for iPad, Raspberry Pi and Linux, and a 3D-printed hardware deck on the ESP32-P4. They sync with Pioneer players over Pro DJ Link.">
+  <meta property="og:title" content="freedj — open-source DJ decks">
+  <meta property="og:description" content="A software CDJ for iPad, Pi and Linux, and a 3D-printed ESP32-P4 hardware deck. Open source, Pro DJ Link sync.">
+  <meta property="og:image" content="https://freedj3000.com/images/deck-render.jpg">
+  <meta property="og:url" content="https://freedj3000.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --surface: #14161a;
+      --border: #262a31;
+      --text: #e9eaec;
+      --muted: #8a9099;
+      --play: #3ddc84;
+      --cue: #ff9a3c;
+      --wave: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    img { max-width: 100%; height: auto; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--play); }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    nav { border-bottom: 1px solid var(--border); }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+    .brand b { color: var(--play); }
+    nav ul { list-style: none; display: flex; gap: 20px; font-size: 0.9rem; }
+    nav ul a { color: var(--muted); text-decoration: none; }
+    nav ul a:hover { color: var(--text); }
+
+    .hero { padding: 64px 0 40px; }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 14ch; }
+    .hero h1 em { font-style: normal; color: var(--play); }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 56ch; margin-top: 18px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-block; padding: 11px 20px; border-radius: 999px; font-weight: 600;
+      text-decoration: none; border: 2px solid var(--play); color: var(--bg); background: var(--play);
+    }
+    .btn.alt { background: transparent; color: var(--cue); border-color: var(--cue); }
+    .hero img { width: 100%; border-radius: 14px; margin-top: 44px; border: 1px solid var(--border); display: block; }
+
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    section h2 { font-size: 1.8rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .kicker { color: var(--cue); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .lead { color: var(--muted); max-width: 62ch; margin-bottom: 28px; }
+
+    .split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: start; }
+    .split img { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+    ul.feat { list-style: none; display: grid; gap: 10px; }
+    ul.feat li { padding-left: 22px; position: relative; }
+    ul.feat li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 9px; height: 9px; border-radius: 50%; background: var(--play); }
+    .links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 600; }
+
+    .status { display: inline-block; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); margin-left: 8px; vertical-align: middle; }
+    .status.live { color: var(--play); border-color: var(--play); }
+
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--muted); font-size: 0.85rem; }
+    footer p + p { margin-top: 8px; }
+
+    @media (max-width: 760px) {
+      .split, .grid3 { grid-template-columns: 1fr; }
+      nav ul { gap: 14px; }
+      nav ul li.hide-sm { display: none; }
+      .hero { padding-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">free<b>dj</b></a>
+    <ul>
+      <li><a href="#software">Software</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li class="hide-sm"><a href="#open">Open source</a></li>
+      <li><a href="https://github.com/audiodestrukt">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>DJ decks you can <em>build, read and change.</em></h1>
+    <p>freedj is a family of open-source DJ decks: a software CDJ that runs on an iPad, a
+      Raspberry Pi or a Linux desktop, and a 3D-printed hardware deck built on an ESP32-P4
+      microcontroller board. Both join a booth of Pioneer players over Pro DJ Link and beat-sync with them.</p>
+    <div class="cta">
+      <a class="btn" href="#hardware">The hardware deck</a>
+      <a class="btn alt" href="#software">The software deck</a>
+    </div>
+    <img src="images/deck-render.jpg" width="1400" height="963"
+         alt="Render of the freedj hardware deck: a compact grey case with a jog platter, CUE and PLAY buttons, a pitch fader and a colour screen showing a scrolling waveform.">
+  </div>
+</header>
+
+<section id="hardware">
+  <div class="wrap">
+    <div class="kicker">freedj hardware</div>
+    <h2>A CDJ on an ESP32-P4 <span class="status">in progress</span></h2>
+    <p class="lead">A small standalone deck. Plug in a rekordbox USB stick and play: no laptop.
+      The firmware, the printed case and the jog platter are all open.</p>
+    <div class="split">
+      <ul class="feat">
+        <li>Plays WAV and MP3 from a rekordbox USB stick or an SD card, with rekordbox colour waveforms, beat grids, hot cues and memory cues.</li>
+        <li>Varispeed and keylock (master tempo), CDJ-style CUE, loops, beat jump, slip and reverse.</li>
+        <li>Beat sync with CDJs and XDJs over Pro DJ Link.</li>
+        <li>A real jog platter: a magnetic angle sensor under a printed platter on two skate bearings.</li>
+        <li>Drive it with its own controls, a Numark DJ2Go, or a Pioneer XDJ-1000MK2 over USB.</li>
+        <li>3D-printed case in angled and flat versions, from parametric CAD you can change.</li>
+      </ul>
+      <div>
+        <p class="lead" style="margin-bottom:12px">The first release will use only off-the-shelf parts: an ESP32-P4 dev kit, a 4" screen,
+          an AS5600 sensor, two buttons and a slide pot. No custom circuit boards.</p>
+        <div class="links">
+          <a href="https://github.com/audiodestrukt/freedj-esp">Source on GitHub →</a>
+          <a href="https://github.com/audiodestrukt/freedj-esp/tree/main/p4/deck/hardware">CAD files →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="software">
+  <div class="wrap">
+    <div class="kicker">freedj-3000</div>
+    <h2>A software CDJ <span class="status live">on the App Store</span></h2>
+    <p class="lead">A clean-room deck in Rust: the screen, controls and behaviour of a modern
+      media player. It takes a player number on a Pro DJ Link network, follows the tempo master or
+      becomes it, and browses the other players' media.</p>
+    <div class="split">
+      <div>
+        <ul class="feat">
+          <li><b>OpenDeck DJ</b> for iPad and iPhone.</li>
+          <li>The same code on a Raspberry Pi 5 and any Linux desktop.</li>
+          <li>GPU-rendered waveforms paced to the display; audio on its own real-time thread.</li>
+          <li>Reads rekordbox USB exports: browse, beat grids, cues.</li>
+        </ul>
+        <div class="links">
+          <a href="https://apps.apple.com/app/id6807472453">OpenDeck DJ on the App Store →</a>
+          <a href="https://github.com/audiodestrukt/freedj-3000">Source on GitHub →</a>
+          <a href="https://audiodestrukt.com/blog/posts/cloning-an-xdj-1000.html">How it started →</a>
+        </div>
+      </div>
+      <img src="images/opendeck-ipad.jpg" width="900" height="1200" loading="lazy"
+           alt="OpenDeck DJ on an iPad: a deck screen with a scrolling blue waveform, tempo and BPM readouts, a large jog wheel, CUE and PLAY buttons and a tempo fader.">
+    </div>
+  </div>
+</section>
+
+<section id="open">
+  <div class="wrap">
+    <div class="kicker">Open source</div>
+    <h2>Yours to build</h2>
+    <p class="lead">Everything is public: firmware, app, CAD and build notes.</p>
+    <div class="grid3">
+      <div class="card">
+        <h3>Build one</h3>
+        <p>Off-the-shelf parts, a 3D printer and a weekend. Build guides are coming with the first hardware release.</p>
+      </div>
+      <div class="card">
+        <h3>Change it</h3>
+        <p>Software under the GPL, hardware under CERN-OHL-S. Fork it, remix the case, map your own controller.</p>
+      </div>
+      <div class="card">
+        <h3>Follow along</h3>
+        <p>Progress is posted on <a href="https://audiodestrukt.com/blog/">the audiodestrukt blog</a> and Instagram as it happens.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>freedj™ and audiodestrukt™ are trademarks of Dan Newcome. The code and designs are open source;
+      the names and logos are not. Forks and derived products need their own name.</p>
+    <p>Not affiliated with or endorsed by Pioneer DJ, AlphaTheta or any other brand named here.
+      Pro DJ Link, rekordbox, CDJ and XDJ are trademarks of their owners.</p>
+    <p>An <a href="https://audiodestrukt.com">audiodestrukt</a> project.</p>
+  </div>
+</footer>
+
+</body>
+</html>
