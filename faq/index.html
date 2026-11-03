@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — freedj</title>
+  <meta name="description" content="Questions about freedj: supported devices, parts, 3D printing, rekordbox and Pro DJ Link, other firmware, licences and how to contribute.">
+  <meta property="og:title" content="freedj FAQ">
+  <meta property="og:description" content="Supported devices, parts, 3D printing, rekordbox and Pro DJ Link, licences, contributing.">
+  <meta property="og:image" content="https://freedj3000.com/images/deck-render.jpg">
+  <meta property="og:url" content="https://freedj3000.com/faq/">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">free<b>dj</b></a>
+    <ul>
+      <li><a href="/#software">Software</a></li>
+      <li><a href="/#hardware">Hardware</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="https://github.com/audiodestrukt">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap faq" style="padding-top:48px; padding-bottom:40px; max-width:820px">
+  <h1 style="font-size:2.4rem; letter-spacing:-0.02em">Questions</h1>
+  <p class="lead" style="margin-bottom:12px">Answers to what people have been asking. freedj is two projects under one name:
+    the <b>hardware deck</b> (ESP32-P4, 3D-printed) and <b>freedj-3000</b>, the software deck
+    (OpenDeck DJ on iPad and iPhone, Raspberry Pi, Linux). Answers say which one they're about.</p>
+  <div class="toc">
+    <a href="#basics">The basics</a>
+    <a href="#devices">Devices</a>
+    <a href="#build">Building one</a>
+    <a href="#music">Music and the booth</a>
+    <a href="#firmware">Other firmware</a>
+    <a href="#legal">Licence and name</a>
+    <a href="#contribute">Contributing</a>
+  </div>
+
+  <h2 id="basics">The basics</h2>
+
+  <details><summary>What is freedj?</summary><div>
+    <p>Open-source DJ decks that behave like a CDJ: load a track, cue it, nudge it, loop it, and
+    beat-sync with the other players in the booth over Pro DJ Link.</p>
+    <ul>
+      <li><b>The hardware deck</b> is a small standalone player: an ESP32-P4 board, a 4" touch screen, a
+        real jog platter and a 3D-printed case. Plug in a USB stick, no laptop.</li>
+      <li><b>freedj-3000</b> is a software deck written in Rust. It ships as OpenDeck DJ on the App Store
+        and runs on a Raspberry Pi 5 or a Linux PC.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Is it made by Pioneer, or connected to them?</summary><div>
+    <p>No. freedj is an independent project with no connection to Pioneer DJ or AlphaTheta. None of
+    their code is used. It talks to their players using the publicly documented Pro DJ Link protocol
+    (thanks to Deep Symmetry's research), and reads rekordbox's USB export format.</p>
+  </div></details>
+
+  <details><summary>Can I buy one?</summary><div>
+    <p>Not right now. The hardware deck is a build-it-yourself project. The software deck is on the
+    <a href="https://apps.apple.com/app/id6807472453">App Store</a> as OpenDeck DJ, and free to build from source
+    for the Pi and Linux.</p>
+  </div></details>
+
+  <details><summary>When can I build the hardware deck?</summary><div>
+    <p>The first release is being finished now: an off-the-shelf-parts version with a build guide,
+    parts list and wiring table. There's no date yet. Everything so far is already public on
+    <a href="https://github.com/audiodestrukt/freedj-esp">GitHub</a> if you want to start early, but expect it to change.</p>
+  </div></details>
+
+  <h2 id="devices">Devices</h2>
+
+  <details><summary>What does the software deck (freedj-3000 / OpenDeck DJ) run on?</summary><div>
+    <ul>
+      <li><b>iPad and iPhone:</b> OpenDeck DJ on the App Store.</li>
+      <li><b>Raspberry Pi 5:</b> 60 fps, about 0.6 of one core while playing with key lock. A Pi 4 runs it too, with less headroom.</li>
+      <li><b>Linux PCs</b> with Vulkan graphics.</li>
+    </ul>
+    <p>No Android, Windows or macOS build yet. Any screen works; the layout scales to the resolution.</p>
+  </div></details>
+
+  <details><summary>Which board does the hardware deck use? Will other ESP32 boards work?</summary><div>
+    <p>It's built for the <b>Waveshare ESP32-P4-Module-DEV-KIT</b>. That's the only board supported today.</p>
+    <ul>
+      <li><b>Other ESP32-P4 boards</b> (Guition, Espressif's own kits) could be ported: the chip is the same,
+        but the screen, audio chip and pins differ. The case is also shaped around the Waveshare board.</li>
+      <li><b>Older ESP32s</b> (ESP32, S3) don't have the speed or memory for this deck. There's a separate,
+        experimental timecode-vinyl player for the ESP32-A1S audio board in the same repo.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Which screen?</summary><div>
+    <p>A 4.0" 320×480 SPI touch screen (ST7796S with FT6336U touch, sold as the MSP4031 module or
+    under brands like Hosyond). The case's window and screw bosses are made for it; check the hole
+    spacing with calipers before printing, as clones vary. A larger DSI screen is planned.</p>
+  </div></details>
+
+  <details><summary>Which controllers work?</summary><div>
+    <ul>
+      <li><b>Hardware deck:</b> its own jog, CUE/PLAY and pitch fader, plus a <b>Numark DJ2Go</b> or a
+        <b>Pioneer XDJ-1000MK2</b> over USB (set the XDJ to USB MIDI control mode).</li>
+      <li><b>Software deck:</b> any USB MIDI controller, mapped in a text file (<code>controllers.toml</code>)
+        with LED feedback. Tested on a DJ2Go.</li>
+    </ul>
+    <p>Want your controller supported? See <a href="#contribute">contributing</a>: a mapping is often an evening's work.</p>
+  </div></details>
+
+  <details><summary>Does it have two decks, or a mixer?</summary><div>
+    <p>Each freedj deck is one deck, like a CDJ: you pair it with another player and a mixer. A
+    two-deck version with a built-in mixer (EQs down each side, one platter in the middle) is
+    planned for the hardware deck.</p>
+  </div></details>
+
+  <h2 id="build">Building one</h2>
+
+  <details><summary>What parts do I need?</summary><div>
+    <p>For the first release, all off the shelf:</p>
+    <ul>
+      <li>Waveshare ESP32-P4-Module-DEV-KIT and the 4" SPI touch screen;</li>
+      <li>an AS5600 magnetic angle sensor board with its diametric magnet (Ø4 × 2 mm);</li>
+      <li>two 608 skateboard bearings, and a steel ring for the platter's weight;</li>
+      <li>two 16 mm panel-mount push buttons and a slide potentiometer for pitch;</li>
+      <li>screws, M3 heat-set inserts, jumper wires, and the printed parts.</li>
+    </ul>
+    <p>The full parts list comes with the build guide.</p>
+  </div></details>
+
+  <details><summary>What 3D printer do I need?</summary><div>
+    <ul>
+      <li><b>Any FDM printer with a bed of about 256 mm or bigger</b> prints the top shell in one piece.
+        The deck is 160 × 185 mm.</li>
+      <li><b>Print the flat version first:</b> it prints upside down with no supports. The angled
+        version needs supports under the screen slope.</li>
+      <li>PLA or PETG both work for the case. PETG is tougher for the platter.</li>
+      <li><b>The jog shaft is a press fit</b> into the bearings (8.1 mm printed, 8 mm bore). Printers
+        vary, so print <code>fit_gauge.stl</code> first and pick the pin that fits snugly.</li>
+      <li>Small test pieces (<code>jog_test_*</code>) check the magnet gap before you commit to a full platter.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Do I need to design or order a circuit board?</summary><div>
+    <p>No. The first release wires the buttons, pitch fader and sensor straight to the dev board with
+    jumper wires, about nine wires in all. A small control board with lit buttons is designed and
+    will come later as an optional upgrade.</p>
+  </div></details>
+
+  <details><summary>How hard is it to build?</summary><div>
+    <p>If you've flashed an ESP32 and soldered a header, you can build it. You'll press bearings,
+    melt in heat-set inserts, glue in a magnet, crimp or solder a few wires, and flash the firmware
+    from a computer over USB.</p>
+  </div></details>
+
+  <details><summary>Can I change the case?</summary><div>
+    <p>Yes. The case is parametric Python CAD (build123d). The size follows the jog and screen, and
+    there are switches for angled or flat, the platter style and the button style. Remixes are welcome,
+    under the hardware licence.</p>
+  </div></details>
+
+  <h2 id="music">Music and the booth</h2>
+
+  <details><summary>What file formats play?</summary><div>
+    <ul>
+      <li><b>Hardware deck:</b> WAV and MP3 (44.1 and 48 kHz). FLAC and AIFF are planned.</li>
+      <li><b>Software deck:</b> MP3, FLAC, AAC, OGG, WAV and AIFF.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Does it work with my rekordbox USB stick?</summary><div>
+    <p>Yes. Plug in a stick exported from rekordbox and the deck reads rekordbox's analysis: colour
+    waveforms, beat grids, hot cues and memory cues.</p>
+    <ul>
+      <li><b>Hardware deck:</b> tracks are listed by BPM and file name for now. Playlists, titles and
+        artists are next.</li>
+      <li><b>Software deck:</b> also has its own beat detection, so tracks rekordbox never saw get a grid too.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Do I need rekordbox?</summary><div>
+    <p>No. Both decks play plain music files from a USB stick or SD card. On the hardware deck, beat
+    sync, quantize and beat loops need a beat grid, which today comes from rekordbox's analysis. The
+    software deck analyses tracks itself.</p>
+  </div></details>
+
+  <details><summary>Will it sync with CDJs in a club?</summary><div>
+    <p>Both decks join a Pro DJ Link network with an Ethernet cable and take a player number.</p>
+    <ul>
+      <li>Tested against a <b>Pioneer XDJ-1000MK2</b>. The software deck syncs both ways (it follows the
+        master or becomes it) and browses the other players' media.</li>
+      <li>The hardware deck follows the tempo master. Becoming master is next.</li>
+      <li><b>CDJ-3000s</b> speak the same sync protocol but haven't been tested yet. Own one? Ten minutes with
+        <a href="https://github.com/audiodestrukt/freedj-3000/blob/main/docs/testing/cdj-3000-interop.md">this script</a> would settle it.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>Does it have key lock (master tempo)?</summary><div>
+    <p>Yes, both. Change the tempo without changing the pitch.</p>
+  </div></details>
+
+  <details><summary>Does it work with timecode vinyl?</summary><div>
+    <p>That's a separate, experimental firmware for the ESP32-A1S audio board in the
+    <a href="https://github.com/audiodestrukt/freedj-esp">freedj-esp repo</a>: put a control record on a
+    turntable and play files in sync with it. It's in progress.</p>
+  </div></details>
+
+  <h2 id="firmware">Other firmware</h2>
+
+  <details><summary>Can I run other firmware on the hardware deck?</summary><div>
+    <p>The brain is a standard ESP32-P4 dev board, so you can flash anything that supports it. Other
+    firmware won't know about the deck's jog sensor, buttons or screen unless it's written for them.</p>
+  </div></details>
+
+  <details><summary>Can it run Mixxx, rekordbox, Serato or Engine DJ?</summary><div>
+    <p>Not on the ESP32: those need a full computer. The Linux route is freedj-3000 on a Raspberry Pi,
+    which is its own software deck.</p>
+  </div></details>
+
+  <details><summary>Is the software deck the same code as the hardware deck?</summary><div>
+    <p>No. They share ideas, file formats and the Pro DJ Link protocol, but the hardware deck is C++ for
+    the ESP32 and the software deck is Rust for computers.</p>
+  </div></details>
+
+  <h2 id="legal">Licence and name</h2>
+
+  <details><summary>Is it free and open source?</summary><div>
+    <ul>
+      <li><b>Software and firmware:</b> GPL. Read it, change it, share it.</li>
+      <li><b>Hardware</b> (case CAD, circuit boards): CERN Open Hardware Licence, strongly reciprocal (CERN-OHL-S).</li>
+    </ul>
+    <p>Both licences say the same thing: if you share or sell something built from freedj, you share its
+    source under the same terms.</p>
+  </div></details>
+
+  <details><summary>Can I build and sell my own?</summary><div>
+    <p>The licences allow it, as long as you publish your changes under the same licence. But you can't
+    use the <b>freedj</b> or <b>audiodestrukt</b> names or logos: they're trademarks, and they aren't covered by
+    the open licences. Give your version its own name. "Based on freedj" is fine.</p>
+  </div></details>
+
+  <details><summary>Is this legal?</summary><div>
+    <p>freedj is a clean-room project: written from scratch, from public documentation and from watching how
+    players behave on the network, with no Pioneer code or firmware. Pioneer, rekordbox, CDJ, XDJ and Pro DJ Link
+    are trademarks of their owners and are named only to describe compatibility.</p>
+  </div></details>
+
+  <h2 id="contribute">Contributing</h2>
+
+  <details><summary>How can I help?</summary><div>
+    <ul>
+      <li><b>Build one</b> when the guide is out, and share photos. Report what was unclear.</li>
+      <li><b>Test with gear we don't have,</b> especially CDJ-3000s and other Pro DJ Link players.</li>
+      <li><b>Map a controller</b> you own.</li>
+      <li><b>Remix the case</b> or design a platter.</li>
+      <li><b>Code:</b> file formats, browsing, effects, ports to other boards.</li>
+    </ul>
+  </div></details>
+
+  <details><summary>How do I report a bug or suggest a feature?</summary><div>
+    <p>Open an issue on GitHub:
+    <a href="https://github.com/audiodestrukt/freedj-esp/issues">hardware deck</a> or
+    <a href="https://github.com/audiodestrukt/freedj-3000/issues">software deck</a>. Say what you did, what you
+    expected, and what happened, with your board or device.</p>
+  </div></details>
+
+  <details><summary>How do I send code?</summary><div>
+    <p>Fork the repo, make the change on a branch, and open a pull request. Small, focused pull requests get
+    merged fastest. For anything big, open an issue first so we can agree on the approach. Contributions are
+    accepted under the project's licence.</p>
+  </div></details>
+
+  <details><summary>Where do I follow progress?</summary><div>
+    <p>On <a href="https://audiodestrukt.com/blog/">the audiodestrukt blog</a>, on Instagram, and in each repo's changelog.</p>
+  </div></details>
+
+  <p class="lead" style="margin-top:36px">Question not here? Open an issue on GitHub and it may end up on this page.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>freedj™ and audiodestrukt™ are trademarks of Dan Newcome. The code and designs are open source;
+      the names and logos are not. Forks and derived products need their own name.</p>
+    <p>Not affiliated with or endorsed by Pioneer DJ, AlphaTheta or any other brand named here.
+      Pro DJ Link, rekordbox, CDJ and XDJ are trademarks of their owners.</p>
+    <p>An <a href="https://audiodestrukt.com">audiodestrukt</a> project.</p>
+  </div>
+</footer>
+
+</body>
+</html>
