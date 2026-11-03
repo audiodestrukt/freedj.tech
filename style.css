@@ -73,3 +73,9 @@ footer p { margin: 0 0 8px; }
   .pair { grid-template-columns: 1fr; }
   h1 { font-size: 22px; }
 }
+
+video { width: 100%; height: auto; display: block; border: 1px solid var(--rule); background: #000; }
+.tl { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.tl figure { margin: 0; }
+.tl figcaption { font-size: 12px; }
+@media (max-width: 760px) { .tl { grid-template-columns: repeat(2, 1fr); } }

@@ -7,7 +7,7 @@
   <meta name="description" content="freedj: a small CDJ-style deck I'm building on an ESP32-P4, with a 3D-printed case and a real jog wheel. Open source: firmware, CAD and all.">
   <meta property="og:title" content="freedj — an open-source DJ deck you can build">
   <meta property="og:description" content="A small CDJ-style deck on an ESP32-P4. 3D-printed case, real jog, rekordbox sticks, Pro DJ Link sync. Open source.">
-  <meta property="og:image" content="https://freedj.tech/images/deck-render.jpg">
+  <meta property="og:image" content="https://freedj.tech/images/deck-hero.jpg">
   <meta property="og:url" content="https://freedj.tech/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -35,11 +35,27 @@
   <p>Everything is open: the firmware, the CAD, and the notes on what broke along the way.</p>
   <p class="sig">— Dan (<a href="https://audiodestrukt.com">audiodestrukt</a>)</p>
 
-  <figure>
-    <img src="images/deck-render.jpg" width="1400" height="963"
-         alt="CAD render of the deck: a compact grey case with a jog platter, CUE and PLAY buttons, a pitch fader and a colour screen showing a scrolling waveform.">
-    <figcaption>CAD render of the design. Photos of the real one on the bench coming soon.</figcaption>
-  </figure>
+  <div class="pair">
+    <figure>
+      <img src="images/deck-hero.jpg" width="1100" height="1467"
+           alt="The freedj deck on a cluttered workbench: white 3D-printed case, black knurled jog platter, a small screen playing a track with a colour waveform, a USB stick plugged in at the back.">
+      <figcaption>the deck as it is now: printed case, rekordbox stick in the back</figcaption>
+    </figure>
+    <figure>
+      <video src="images/on-the-xdj.mp4" poster="images/on-the-xdj.jpg" width="720" height="1280"
+             controls muted loop playsinline preload="none"></video>
+      <figcaption>sitting on top of my XDJ-1000MK2 (tap for sound)</figcaption>
+    </figure>
+  </div>
+
+  <h3>how it got here</h3>
+  <div class="tl">
+    <figure><img src="images/build-01-first-screen.jpg" width="700" height="933" loading="lazy" alt="ESP32-P4 dev board on the bench, jumper wires to a 4 inch screen showing a list of files."><figcaption>oct 29: first screen, jumper wires, a file list</figcaption></figure>
+    <figure><img src="images/build-02-varispeed.jpg" width="700" height="933" loading="lazy" alt="The screen playing house.mp3 at +6.46 % pitch with a blue scrolling waveform."><figcaption>oct 31: scrolling waveform and pitch</figcaption></figure>
+    <figure><img src="images/build-03-xdj-screen.jpg" width="700" height="933" loading="lazy" alt="The screen with an XDJ-style layout and rekordbox colour waveforms, a USB stick plugged into the dev board."><figcaption>oct 31: XDJ-style screen, rekordbox colour waveforms</figcaption></figure>
+    <figure><img src="images/build-04-in-the-case.jpg" width="700" height="933" loading="lazy" alt="The deck in its white printed case with the black jog platter, paused."><figcaption>oct 31: into the printed case</figcaption></figure>
+    <figure><img src="images/build-05-wiring.jpg" width="700" height="933" loading="lazy" alt="The case opened up: the dev board wired to the screen, with the AS5600 sensor board still in its bag."><figcaption>nov 1: opened up to fit the jog sensor</figcaption></figure>
+  </div>
 
   <hr>
 
@@ -59,6 +75,11 @@
     </ul>
 
     <h3>what's inside</h3>
+    <figure>
+      <img src="images/deck-render.jpg" width="1400" height="963" loading="lazy"
+           alt="CAD render of the deck design: grey case, jog platter, lit CUE and PLAY buttons, pitch fader, screen.">
+      <figcaption>the CAD model (build123d). Next version: lit buttons and a pitch fader</figcaption>
+    </figure>
     <div class="pair">
       <figure>
         <img src="images/cutaway-jog.jpg" width="900" height="619" loading="lazy"
