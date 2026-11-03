@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 426" width="820" height="426" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
-<rect width="820" height="426" fill="#fff"/>
-<text x="20" y="26" font-size="15" font-weight="bold">Screen harness: 8 wires</text>
-<rect x="20" y="46" width="220" height="286" rx="6" fill="#f3f3f3" stroke="#999"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 528" width="900" height="528" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="900" height="528" fill="#fff"/>
+<text x="20" y="26" font-size="15" font-weight="bold">Screen harness: 11 wires</text>
+<rect x="20" y="46" width="220" height="388" rx="6" fill="#f3f3f3" stroke="#999"/>
 <text x="30" y="40" fill="#555">4" SPI screen (ST7796S)</text>
-<rect x="470" y="46" width="150" height="286" rx="6" fill="#333"/>
+<rect x="470" y="46" width="150" height="388" rx="6" fill="#333"/>
 <text x="470" y="40" fill="#555">P4 header</text>
 <text x="30" y="74">VCC</text>
 <circle cx="240" cy="70" r="5" fill="#d22"/>
@@ -55,6 +55,26 @@
 <text x="498" y="312" fill="#fff">pin 19</text>
 <text x="558" y="312" fill="#ddd" font-size="12">GPIO3</text>
 <text x="632" y="312" fill="#666" font-size="12">backlight</text>
-<text x="20" y="360" fill="#888">not connected: SDO (MISO), touch: CTP_* pins, SD_* pins</text>
-<text x="20" y="382" fill="#555">Touch isn't used yet: leave the CTP_ pins unconnected.</text>
+<text x="30" y="346">CTP_SCL (touch)</text>
+<circle cx="240" cy="342" r="5" fill="#d4ac0d"/>
+<path d="M240 342 C 330 342, 380 342, 484 342" fill="none" stroke="#d4ac0d" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="342" r="6" fill="#d4ac0d" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="346" fill="#fff">pin 5</text>
+<text x="558" y="346" fill="#ddd" font-size="12">SCL·8</text>
+<text x="632" y="346" fill="#666" font-size="12">shared with the sensor's SCL</text>
+<text x="30" y="380">CTP_SDA (touch)</text>
+<circle cx="240" cy="376" r="5" fill="#2471a3"/>
+<path d="M240 376 C 330 376, 380 376, 484 376" fill="none" stroke="#2471a3" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="376" r="6" fill="#2471a3" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="380" fill="#fff">pin 3</text>
+<text x="558" y="380" fill="#ddd" font-size="12">SDA·7</text>
+<text x="632" y="380" fill="#666" font-size="12">shared with the sensor's SDA</text>
+<text x="30" y="414">CTP_RST (touch)</text>
+<circle cx="240" cy="410" r="5" fill="#c0392b"/>
+<path d="M240 410 C 330 410, 380 410, 484 410" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="410" r="6" fill="#c0392b" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="414" fill="#fff">pin 21</text>
+<text x="558" y="414" fill="#ddd" font-size="12">GPIO2</text>
+<text x="20" y="462" fill="#888">not connected: SDO (MISO), CTP_INT, SD_* pins</text>
+<text x="20" y="484" fill="#555">Touch and the jog sensor share pins 3 and 5 (I2C): double up those wires.</text>
 </svg>

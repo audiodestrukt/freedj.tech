@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 324" width="820" height="324" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
-<rect width="820" height="324" fill="#fff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 324" width="900" height="324" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="900" height="324" fill="#fff"/>
 <text x="20" y="26" font-size="15" font-weight="bold">Jog sensor harness: 5 wires</text>
 <rect x="20" y="46" width="220" height="184" rx="6" fill="#f3f3f3" stroke="#999"/>
 <text x="30" y="40" fill="#555">AS5600 board</text>

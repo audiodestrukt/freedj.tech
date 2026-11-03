@@ -136,17 +136,19 @@ Waveshare prints the GPIO numbers next to the pins, which is a good double check
 
 <img src="../images/wiring/header.svg" width="900" height="630" alt="The 40-pin header with every pin used by the screen, the jog sensor and the panel, colour-coded.">
 
-<p>Do it one harness at a time, and check each wire against the picture before you power up.</p>
+<p>Do it one harness at a time, and check each wire against the picture before you power up.
+The screen's touch and the jog sensor both use pins 3 and 5 (they're on the same I2C bus), so two wires go on each of those pins:
+use a Y-splice, or solder the two wires together into one connector.</p>
 
-<h3>Screen: 8 wires</h3>
-<img src="../images/wiring/harness-screen.svg" width="820" height="400" alt="Screen VCC to pin 17, GND 20, CS 15, RESET 18, DC 16, SDI 13, SCK 11, LED 19.">
+<h3>Screen: 11 wires</h3>
+<img src="../images/wiring/harness-screen.svg" width="900" height="528" alt="Screen VCC to pin 17, GND 20, CS 15, RESET 18, DC 16, SDI 13, SCK 11, LED 19; touch CTP_SCL to pin 5, CTP_SDA to pin 3, CTP_RST to pin 21.">
 
 <h3>Jog sensor: 5 wires</h3>
-<img src="../images/wiring/harness-jog.svg" width="820" height="300" alt="AS5600 VCC to pin 1, GND 6, SDA 3, SCL 5, DIR to GND on pin 9.">
+<img src="../images/wiring/harness-jog.svg" width="900" height="324" alt="AS5600 VCC to pin 1, GND 6, SDA 3, SCL 5, DIR to GND on pin 9.">
 <p>Don't skip the DIR wire. If DIR isn't tied to ground, the jog reads noisy and can turn the wrong way.</p>
 
 <h3>Buttons and pitch fader: 7 wires</h3>
-<img src="../images/wiring/harness-panel.svg" width="820" height="340" alt="CUE to pins 27 and 25, PLAY to pins 28 and 30, fader wiper to pin 12, screen end to pin 1, your end to pin 14.">
+<img src="../images/wiring/harness-panel.svg" width="900" height="370" alt="CUE to pins 27 and 25, PLAY to pins 28 and 30, fader wiper to pin 12, screen end to pin 1, your end to pin 14.">
 <ul>
 <li><b>Tact switches</b> have four legs. Use two that are diagonally opposite: that pair always switches, whichever way round the switch is.</li>
 <li><b>The fader's 3V3 end</b> shares pin 1 with the sensor's VCC: twist the two wires together into one connector, or splice them.</li>
@@ -179,7 +181,7 @@ Docker build.</p>
 <code>screen /dev/ttyACM0 115200</code>, anything). Each key below prints a status line.</p>
 
 <ul>
-<li><b>Screen:</b> you should see the deck screen and a track list.</li>
+<li><b>Screen and touch:</b> you should see the deck screen and a track list. Tap a track to load it.</li>
 <li><b>Jog sensor:</b> press <code>E</code>. It should say the magnet is detected. Spin the platter and press <code>e</code>: the tick count changes.
 Turning it clockwise should move the track forward.</li>
 <li><b>Buttons and fader:</b> press <code>P</code>. Hold CUE or PLAY while you press it, and it shows DOWN. Move the fader from one end to the
@@ -188,8 +190,7 @@ other and press <code>P</code> again: the pitch number should run from 0 to 1.</
 Push the fader away from you and the track slows down; pull it toward you and it speeds up.</li>
 </ul>
 
-<p>The fader learns its own ends: after you power up, slide it once all the way up and down so it knows its full range.
-Ignore the "FT5x06" touch errors at boot: touch isn't wired up yet.</p>
+<p>The fader learns its own ends: after you power up, slide it once all the way up and down so it knows its full range.</p>
 
 <h2 id="close">8. Close it up</h2>
 
@@ -210,6 +211,10 @@ port) instead of 3/5. Unplug everything except USB and try again, then add one h
 <h3>The jog is jumpy, or moves by itself</h3>
 <p>Check DIR goes to GND. Press <code>E</code>: if the magnet is "too weak", it's too far from the chip; check the magnet is flush with the end of
 the shaft and the sensor board is screwed down flat. Keep the speaker away from the sensor.</p>
+
+<h3>Touch doesn't respond</h3>
+<p>The boot log (in the serial terminal) shows "FT5x06 init failed" if the touch chip doesn't answer. Check CTP_SDA is on pin 3, CTP_SCL on pin 5,
+and CTP_RST on pin 21. The log line "I2C devices:" lists what answered: 0x38 is the touch chip, 0x36 the jog sensor.</p>
 
 <h3>The jog turns the wrong way</h3>
 <p>DIR is probably on 3V3 instead of GND.</p>

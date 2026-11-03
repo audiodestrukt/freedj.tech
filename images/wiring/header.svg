@@ -15,7 +15,7 @@
 <circle cx="470" cy="516" r="7" fill="#2471a3" stroke="#fff" stroke-width="1.5"/>
 <text x="490" y="520" fill="#999">3</text>
 <text x="516" y="520" fill="#000">SDA·7</text>
-<text x="588" y="520" font-weight="bold" fill="#2471a3">jog SDA</text>
+<text x="588" y="520" font-weight="bold" fill="#2471a3">screen CTP_SDA (touch), jog SDA</text>
 <circle cx="440" cy="490" r="7" fill="#222" stroke="#fff" stroke-width="1.5"/>
 <text x="420" y="494" text-anchor="end" fill="#999">6</text>
 <text x="394" y="494" text-anchor="end" fill="#000">GND</text>
@@ -23,7 +23,7 @@
 <circle cx="470" cy="490" r="7" fill="#d4ac0d" stroke="#fff" stroke-width="1.5"/>
 <text x="490" y="494" fill="#999">5</text>
 <text x="516" y="494" fill="#000">SCL·8</text>
-<text x="588" y="494" font-weight="bold" fill="#d4ac0d">jog SCL</text>
+<text x="588" y="494" font-weight="bold" fill="#d4ac0d">screen CTP_SCL (touch), jog SCL</text>
 <circle cx="440" cy="464" r="7" fill="#bbb" stroke="#fff" stroke-width="1.5"/>
 <text x="420" y="468" text-anchor="end" fill="#999">8</text>
 <text x="394" y="468" text-anchor="end" fill="#888">TXD·37</text>
@@ -80,9 +80,10 @@
 <circle cx="440" cy="282" r="7" fill="#bbb" stroke="#fff" stroke-width="1.5"/>
 <text x="420" y="286" text-anchor="end" fill="#999">22</text>
 <text x="394" y="286" text-anchor="end" fill="#888">GPIO1</text>
-<circle cx="470" cy="282" r="7" fill="#bbb" stroke="#fff" stroke-width="1.5"/>
+<circle cx="470" cy="282" r="7" fill="#c0392b" stroke="#fff" stroke-width="1.5"/>
 <text x="490" y="286" fill="#999">21</text>
-<text x="516" y="286" fill="#888">GPIO2</text>
+<text x="516" y="286" fill="#000">GPIO2</text>
+<text x="588" y="286" font-weight="bold" fill="#c0392b">screen CTP_RST (touch)</text>
 <circle cx="440" cy="256" r="7" fill="#bbb" stroke="#fff" stroke-width="1.5"/>
 <text x="420" y="260" text-anchor="end" fill="#999">24</text>
 <text x="394" y="260" text-anchor="end" fill="#888">GPIO36</text>

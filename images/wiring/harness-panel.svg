@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 370" width="820" height="370" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
-<rect width="820" height="370" fill="#fff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 370" width="900" height="370" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="900" height="370" fill="#fff"/>
 <text x="20" y="26" font-size="15" font-weight="bold">Buttons and pitch fader: 7 wires</text>
 <rect x="20" y="46" width="220" height="252" rx="6" fill="#f3f3f3" stroke="#999"/>
 <text x="30" y="40" fill="#555">switches and slide pot</text>
