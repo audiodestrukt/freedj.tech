@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 426" width="820" height="426" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="820" height="426" fill="#fff"/>
+<text x="20" y="26" font-size="15" font-weight="bold">Screen harness: 8 wires</text>
+<rect x="20" y="46" width="220" height="286" rx="6" fill="#f3f3f3" stroke="#999"/>
+<text x="30" y="40" fill="#555">4" SPI screen (ST7796S)</text>
+<rect x="470" y="46" width="150" height="286" rx="6" fill="#333"/>
+<text x="470" y="40" fill="#555">P4 header</text>
+<text x="30" y="74">VCC</text>
+<circle cx="240" cy="70" r="5" fill="#d22"/>
+<path d="M240 70 C 330 70, 380 70, 484 70" fill="none" stroke="#d22" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="70" r="6" fill="#d22" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="74" fill="#fff">pin 17</text>
+<text x="558" y="74" fill="#ddd" font-size="12">3V3</text>
+<text x="632" y="74" fill="#666" font-size="12">never 5V</text>
+<text x="30" y="108">GND</text>
+<circle cx="240" cy="104" r="5" fill="#222"/>
+<path d="M240 104 C 330 104, 380 104, 484 104" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="104" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="108" fill="#fff">pin 20</text>
+<text x="558" y="108" fill="#ddd" font-size="12">GND</text>
+<text x="30" y="142">CS</text>
+<circle cx="240" cy="138" r="5" fill="#e67e22"/>
+<path d="M240 138 C 330 138, 380 138, 484 138" fill="none" stroke="#e67e22" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="138" r="6" fill="#e67e22" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="142" fill="#fff">pin 15</text>
+<text x="558" y="142" fill="#ddd" font-size="12">GPIO6</text>
+<text x="30" y="176">RESET</text>
+<circle cx="240" cy="172" r="5" fill="#8e44ad"/>
+<path d="M240 172 C 330 172, 380 172, 484 172" fill="none" stroke="#8e44ad" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="172" r="6" fill="#8e44ad" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="176" fill="#fff">pin 18</text>
+<text x="558" y="176" fill="#ddd" font-size="12">GPIO4</text>
+<text x="30" y="210">DC / RS</text>
+<circle cx="240" cy="206" r="5" fill="#16a085"/>
+<path d="M240 206 C 330 206, 380 206, 484 206" fill="none" stroke="#16a085" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="206" r="6" fill="#16a085" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="210" fill="#fff">pin 16</text>
+<text x="558" y="210" fill="#ddd" font-size="12">GPIO5</text>
+<text x="30" y="244">SDI (MOSI)</text>
+<circle cx="240" cy="240" r="5" fill="#2471a3"/>
+<path d="M240 240 C 330 240, 380 240, 484 240" fill="none" stroke="#2471a3" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="240" r="6" fill="#2471a3" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="244" fill="#fff">pin 13</text>
+<text x="558" y="244" fill="#ddd" font-size="12">GPIO20</text>
+<text x="30" y="278">SCK</text>
+<circle cx="240" cy="274" r="5" fill="#d4ac0d"/>
+<path d="M240 274 C 330 274, 380 274, 484 274" fill="none" stroke="#d4ac0d" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="274" r="6" fill="#d4ac0d" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="278" fill="#fff">pin 11</text>
+<text x="558" y="278" fill="#ddd" font-size="12">GPIO21</text>
+<text x="30" y="312">LED</text>
+<circle cx="240" cy="308" r="5" fill="#7f8c8d"/>
+<path d="M240 308 C 330 308, 380 308, 484 308" fill="none" stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="308" r="6" fill="#7f8c8d" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="312" fill="#fff">pin 19</text>
+<text x="558" y="312" fill="#ddd" font-size="12">GPIO3</text>
+<text x="632" y="312" fill="#666" font-size="12">backlight</text>
+<text x="20" y="360" fill="#888">not connected: SDO (MISO), touch: CTP_* pins, SD_* pins</text>
+<text x="20" y="382" fill="#555">Touch isn't used yet: leave the CTP_ pins unconnected.</text>
+</svg>

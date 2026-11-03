@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a freedj</title>
+<meta name="description" content="Step-by-step guide to building the freedj deck: parts, printing, assembly, wiring diagrams and flashing the firmware.">
+<meta property="og:title" content="Build a freedj">
+<meta property="og:description" content="Parts, printing, assembly, wiring diagrams and flashing: build your own little DJ deck.">
+<meta property="og:image" content="https://freedj.tech/images/deck-hero.jpg">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="stylesheet" href="../style.css?v=5">
+</head>
+<body>
+
+<p><a href="../">&larr; freedj</a></p>
+
+<h1>Build a freedj</h1>
+
+<p>This is the whole build, start to finish: print the case, put the jog together, wire up the
+screen, the jog sensor, two buttons and the pitch fader, and flash the firmware. Everything is
+off-the-shelf parts and jumper wires. No circuit boards to order.</p>
+
+<p>Plan on a weekend: most of it is waiting for the printer. If you get stuck, open an
+<a href="https://github.com/audiodestrukt/freedj-esp/issues">issue on GitHub</a> and I'll help (and fix the guide).</p>
+
+<p><b>Contents:</b> <a href="#parts">1. Parts</a> &middot; <a href="#print">2. Print</a> &middot;
+<a href="#jog">3. Jog</a> &middot; <a href="#mount">4. Mount everything</a> &middot;
+<a href="#wire">5. Wire it</a> &middot; <a href="#flash">6. Flash</a> &middot;
+<a href="#test">7. Test</a> &middot; <a href="#close">8. Close it up</a> &middot;
+<a href="#trouble">Troubleshooting</a></p>
+
+<h2 id="parts">1. Parts</h2>
+
+<p>Where a part has to be exact, the link goes to the exact part. Everything else is a search: any seller's version works.
+Roughly $60&ndash;80 all in, depending on where you buy.</p>
+
+<ul>
+<li><b>Waveshare ESP32-P4-Module-DEV-KIT</b>
+  (<a href="https://www.waveshare.com/esp32-p4-module-dev-kit.htm">Waveshare</a>,
+  <a href="https://www.amazon.com/s?k=Waveshare+ESP32-P4-Module-DEV-KIT">Amazon</a>).
+  Make sure it's this exact board: the case and the pin numbers are made for it. The kit with the 8 &Omega; speaker is handy.</li>
+<li><b>4.0" SPI capacitive touch screen, 320&times;480, ST7796S</b>, model MSP4031
+  (<a href="https://www.lcdwiki.com/4.0inch_Capacitive_SPI_Module_ST7796">LCDwiki specs</a>,
+  <a href="https://www.amazon.com/s?k=4.0+inch+SPI+capacitive+touch+ST7796+MSP4031">Amazon</a>,
+  <a href="https://www.aliexpress.us/w/wholesale-MSP4031-4.0-inch-SPI-ST7796.html">AliExpress</a>).
+  Get the capacitive one (MSP4031), not resistive. Check the four mounting holes are 102.00 &times; 54.88 mm apart: clones vary.</li>
+<li><b>AS5600 magnetic encoder board</b>, the small square one, with its round magnet (4 mm across, 2 mm thick, magnetised across)
+  (<a href="https://www.amazon.com/s?k=AS5600+magnetic+encoder+module">Amazon</a>,
+  <a href="https://www.aliexpress.us/w/wholesale-AS5600-magnetic-encoder-module.html">AliExpress</a>). They come with the magnet.</li>
+<li><b>2&times; 608 bearings</b>, the skateboard kind (<a href="https://www.amazon.com/s?k=608+bearings">Amazon</a>).</li>
+<li><b>2&times; 6&times;6 mm through-hole tact switches, 7.5 mm tall</b>
+  (<a href="https://www.amazon.com/s?k=6x6x7.5mm+tactile+push+button+switch">Amazon</a>).
+  The button caps rest on top of them, so get the 7.5 mm height.</li>
+<li><b>Slide pot: Bourns PTA6043-2015DPB103</b>, 60 mm travel, 10 k&Omega; linear
+  (<a href="https://www.mouser.com/c/?q=PTA6043-2015DPB103">Mouser</a>). The case slot is made for this one.</li>
+<li><b>Female-to-female jumper wires</b>, 20 cm: you need 20 (<a href="https://www.amazon.com/s?k=dupont+jumper+wires+female+to+female+20cm">Amazon</a>).</li>
+<li><b>M3 heat-set inserts</b>: 8 short (about 4 mm) and 4 longer (about 5.7 mm), e.g. a mixed kit
+  (<a href="https://www.amazon.com/s?k=M3+heat+set+inserts+kit">Amazon</a>).</li>
+<li><b>Screws:</b> 8&times; M3 &times; 4 (dev board and sensor), 4&times; M3 &times; 5 thread-forming for plastic (screen),
+  4&times; M3 countersunk (base), 3&times; M2.5 &times; 6 thread-forming (button plate), 2&times; M2 &times; 8 countersunk (fader).
+  An assorted M2/M2.5/M3 kit covers it (<a href="https://www.amazon.com/s?k=M2+M2.5+M3+screw+assortment+kit">Amazon</a>).</li>
+<li><b>Superglue</b> (for the magnet and the switches).</li>
+<li><b>Optional:</b> a small 8 &Omega; speaker with the board's 2-pin plug (comes in the Waveshare kit), a microSD card,
+  4 rubber feet, an Ethernet cable for syncing with other players.</li>
+</ul>
+
+<p><b>Tools:</b> a 3D printer (bed about 256 mm or bigger), a soldering iron (for the heat-set inserts
+and the fader's wires), small screwdrivers, a 3.2 mm drill bit, a computer with a USB-C cable.
+A multimeter helps.</p>
+
+<h2 id="print">2. Print the parts</h2>
+
+<p>Download the print files: <a href="https://github.com/audiodestrukt/freedj-esp/releases/latest/download/freedj-print-files.zip">freedj-print-files.zip</a>
+(on the latest release). There's a <code>PRINT-LIST.txt</code> inside.</p>
+
+<p><b>Print the small test pieces first.</b> They take minutes and tell you whether the big parts will fit your printer:</p>
+<ul>
+<li><code>fit_gauge.stl</code>: pins from 8.05 to 8.20 mm. Push them into a bearing. The platter's shaft is 8.1 mm, so the
+8.1 pin should be a firm push fit. If your printer prints big or small, you'll know now.</li>
+<li><code>magnet_gauge.stl</code>: check the magnet drops into the hole flush.</li>
+</ul>
+
+<p>Then the deck. PLA or PETG, 0.2 mm layers:</p>
+<ul>
+<li><code>shell_flat.stl</code>: upside down, flat on its top. No supports. This is the long one.</li>
+<li><code>base_flat.stl</code>: flat. No supports.</li>
+<li><code>platter_flat.stl</code>: upside down, shaft pointing up. Supports only in the recess on the top. Use 3&ndash;4 walls; the shaft is a press fit.</li>
+<li><code>button_plate.stl</code>: flat, frames up. This holds the two switches under the buttons.</li>
+<li><code>play_cap_plain.stl</code>, <code>cue_cap_plain.stl</code>: upside down, no supports.</li>
+<li><code>slider_knob.stl</code>: upright, socket down.</li>
+</ul>
+
+<h2 id="jog">3. Put the jog together</h2>
+
+<img src="../images/build/jog-section.jpg" width="800" height="550" loading="lazy" alt="Cutaway of the jog: shaft through two bearings, magnet in its tip just above the sensor board.">
+
+<ol>
+<li><b>Press the two bearings into the round boss</b> on the underside of the shell, one from each end, until they're flush. A vise or a flat block of wood helps.</li>
+<li><b>Glue the magnet into the pocket</b> in the end of the platter's shaft. Use a tiny drop of glue and push it all the way down, so the magnet sits <b>flush</b> with the end of the shaft. Don't let it stand proud: it would touch the sensor.</li>
+<li>Once the glue has set, <b>push the shaft through both bearings</b> from the top. It should be a firm press fit, and the platter should spin freely without scraping the top.</li>
+</ol>
+
+<h2 id="mount">4. Mount everything</h2>
+
+<p><b>Heat-set inserts.</b> With the soldering iron, press the M3 inserts into the four corner bosses of the shell (the long ones), the four
+dev board standoffs on the base, and the four small bosses on the base under the jog (the short ones).</p>
+
+<p><b>Sensor board.</b> Screw the AS5600 board onto the four small bosses on the base, chip facing up. It sits
+right under the shaft: when the base goes on, the magnet ends up about 1 mm above the chip.</p>
+<img src="../images/build/sensor-mounted.jpg" width="800" height="550" loading="lazy" alt="The AS5600 board screwed onto its four bosses, with headers pointing out to both sides.">
+
+<p><b>Dev board.</b> Its mounting holes are made for M2.5; drill them out to 3.2 mm. Screw it onto the four standoffs on the base,
+with the Ethernet and USB-A ports facing the back wall and the USB-C ports facing the right side.</p>
+
+<p><b>Screen.</b> Put it face down into the shell behind the window and screw it onto the four bosses with the
+M3 &times; 5 thread-forming screws. Don't overtighten: they cut their own thread in the plastic.</p>
+<img src="../images/build/screen-bosses.jpg" width="800" height="550" loading="lazy" alt="Underside of the shell: the screen window and its four screw bosses.">
+
+<p><b>Buttons.</b> Push each tact switch's legs through the holes in the button plate, so the switch sits flat inside its
+little frame, and put a drop of glue under it. Solder a wire to two diagonally opposite legs underneath (see the wiring below);
+bend the other two legs flat. Drop the caps into the CUE and PLAY holes from inside the shell, then screw the plate on from
+below with the three M2.5 screws. It holds the caps in. Press each cap: you should feel the switch click.</p>
+<img src="../images/build/buttons-section.jpg" width="800" height="550" loading="lazy" alt="Cutaway of the buttons: printed caps through the top, nubs resting on the switches, the board underneath holding them in.">
+
+<p><b>Pitch fader.</b> Solder three wires to one side of the fader (both ends and the middle pin, the wiper).
+Put it under the slot and screw it in from the top with the two M2 countersunk screws. Push the knob onto its lever.</p>
+
+<h2 id="wire">5. Wire it</h2>
+
+<p>Everything plugs into the dev board's 40-pin header. Pin 1 is the 3V3 pin at the end near the
+USB-C ports and the C6_UART connector. Odd pins are on the inside row, even pins on the board edge.
+Waveshare prints the GPIO numbers next to the pins, which is a good double check.</p>
+
+<p><b>Never connect anything to the 5V pins</b> (2 and 4). Everything here runs on 3.3 V.</p>
+
+<img src="../images/wiring/header.svg" width="900" height="630" alt="The 40-pin header with every pin used by the screen, the jog sensor and the panel, colour-coded.">
+
+<p>Do it one harness at a time, and check each wire against the picture before you power up.</p>
+
+<h3>Screen: 8 wires</h3>
+<img src="../images/wiring/harness-screen.svg" width="820" height="400" alt="Screen VCC to pin 17, GND 20, CS 15, RESET 18, DC 16, SDI 13, SCK 11, LED 19.">
+
+<h3>Jog sensor: 5 wires</h3>
+<img src="../images/wiring/harness-jog.svg" width="820" height="300" alt="AS5600 VCC to pin 1, GND 6, SDA 3, SCL 5, DIR to GND on pin 9.">
+<p>Don't skip the DIR wire. If DIR isn't tied to ground, the jog reads noisy and can turn the wrong way.</p>
+
+<h3>Buttons and pitch fader: 7 wires</h3>
+<img src="../images/wiring/harness-panel.svg" width="820" height="340" alt="CUE to pins 27 and 25, PLAY to pins 28 and 30, fader wiper to pin 12, screen end to pin 1, your end to pin 14.">
+<ul>
+<li><b>Tact switches</b> have four legs. Use two that are diagonally opposite: that pair always switches, whichever way round the switch is.</li>
+<li><b>The fader's 3V3 end</b> shares pin 1 with the sensor's VCC: twist the two wires together into one connector, or splice them.</li>
+<li>The fader end nearest the screen goes to 3V3, the end nearest you to GND. If the pitch turns out backwards, swap those two.</li>
+</ul>
+
+<p><b>Speaker (optional):</b> plug it into the board's SPK connector, and keep it away from the jog sensor.
+A speaker's magnet next to the AS5600 makes the jog noisy.</p>
+
+<h2 id="flash">6. Flash the firmware</h2>
+
+<ol>
+<li>Download <a href="https://github.com/audiodestrukt/freedj-esp/releases/latest/download/freedj-esp32p4.bin">freedj-esp32p4.bin</a> (from the <a href="https://github.com/audiodestrukt/freedj-esp/releases/latest">latest release</a>).</li>
+<li>Install esptool (needs Python): <code>pip install esptool</code></li>
+<li>Plug the board's <b>USB TO UART</b> USB-C port into your computer. It shows up as a serial port:
+<code>/dev/ttyACM0</code> on Linux, <code>/dev/cu.usbmodem…</code> on a Mac, <code>COM3</code> or similar on Windows.</li>
+<li>Flash it (use your port name):
+<pre>esptool --chip esp32p4 --port /dev/ttyACM0 -b 921600 write-flash 0x0 freedj-esp32p4.bin</pre>
+</li>
+<li>It resets when it's done, and the screen should come up.</li>
+</ol>
+
+<p>If esptool can't connect, hold the board's BOOT button, tap RESET, let go of BOOT, and try again.
+Building it yourself instead? The <a href="https://github.com/audiodestrukt/freedj-esp/tree/main/p4/deck">README</a> has the
+Docker build.</p>
+
+<h2 id="test">7. Test it before closing the case</h2>
+
+<p>Open a serial terminal on the same port at 115200 baud (the Arduino serial monitor, PuTTY,
+<code>screen /dev/ttyACM0 115200</code>, anything). Each key below prints a status line.</p>
+
+<ul>
+<li><b>Screen:</b> you should see the deck screen and a track list.</li>
+<li><b>Jog sensor:</b> press <code>E</code>. It should say the magnet is detected. Spin the platter and press <code>e</code>: the tick count changes.
+Turning it clockwise should move the track forward.</li>
+<li><b>Buttons and fader:</b> press <code>P</code>. Hold CUE or PLAY while you press it, and it shows DOWN. Move the fader from one end to the
+other and press <code>P</code> again: the pitch number should run from 0 to 1.</li>
+<li><b>Play something:</b> put a rekordbox USB stick in a USB-A port (or WAV/MP3 files on the microSD card), pick a track on the screen, press PLAY.
+Push the fader away from you and the track slows down; pull it toward you and it speeds up.</li>
+</ul>
+
+<p>The fader learns its own ends: after you power up, slide it once all the way up and down so it knows its full range.
+Ignore the "FT5x06" touch errors at boot: touch isn't wired up yet.</p>
+
+<h2 id="close">8. Close it up</h2>
+
+<p>Tuck the wires in so nothing touches the platter's shaft, put the base on, and screw it in with the four
+countersunk M3 screws. Stick the feet on. Done.</p>
+
+<p><b>Syncing with other players:</b> plug an Ethernet cable into the same network as your CDJs or XDJs. The deck
+joins Pro DJ Link as player 2, so make sure no other player is set to 2.</p>
+
+<p>Built one? Send me a photo on Instagram, or post it in a GitHub issue. I'd love to see it.</p>
+
+<h2 id="trouble">Troubleshooting</h2>
+
+<h3>Nothing on the screen, and esptool can't connect</h3>
+<p>Almost always a wiring mistake. Two common ones: screen VCC on 5V (or on both 3V3 and 5V), and wires on pins 8/10 (the serial
+port) instead of 3/5. Unplug everything except USB and try again, then add one harness at a time.</p>
+
+<h3>The jog is jumpy, or moves by itself</h3>
+<p>Check DIR goes to GND. Press <code>E</code>: if the magnet is "too weak", it's too far from the chip; check the magnet is flush with the end of
+the shaft and the sensor board is screwed down flat. Keep the speaker away from the sensor.</p>
+
+<h3>The jog turns the wrong way</h3>
+<p>DIR is probably on 3V3 instead of GND.</p>
+
+<h3>The pitch is backwards</h3>
+<p>Swap the fader's two end wires (pin 1 and pin 14).</p>
+
+<h3>A button does nothing</h3>
+<p>Press <code>P</code> while holding it. If it never shows DOWN, you're probably on two legs that are always connected. Move one wire to the diagonal leg.</p>
+
+<h3>The platter scrapes or wobbles</h3>
+<p>The shaft isn't all the way through both bearings, or the bearings aren't fully seated. If the shaft is loose, print the fit gauge and
+check which pin fits your bearings.</p>
+
+<hr>
+<p><small>freedj is open source: firmware under the GPL, case files under CERN-OHL-S. The freedj name is mine, so if you
+share your own version, give it another name. Not affiliated with Pioneer DJ / AlphaTheta.</small></p>
+
+</body>
+</html>

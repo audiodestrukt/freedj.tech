@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 370" width="820" height="370" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="820" height="370" fill="#fff"/>
+<text x="20" y="26" font-size="15" font-weight="bold">Buttons and pitch fader: 7 wires</text>
+<rect x="20" y="46" width="220" height="252" rx="6" fill="#f3f3f3" stroke="#999"/>
+<text x="30" y="40" fill="#555">switches and slide pot</text>
+<rect x="470" y="46" width="150" height="252" rx="6" fill="#333"/>
+<text x="470" y="40" fill="#555">P4 header</text>
+<text x="30" y="74">CUE: one leg</text>
+<circle cx="240" cy="70" r="5" fill="#e67e22"/>
+<path d="M240 70 C 330 70, 380 70, 484 70" fill="none" stroke="#e67e22" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="70" r="6" fill="#e67e22" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="74" fill="#fff">pin 27</text>
+<text x="558" y="74" fill="#ddd" font-size="12">GPIO24</text>
+<text x="30" y="108">CUE: diagonal leg</text>
+<circle cx="240" cy="104" r="5" fill="#222"/>
+<path d="M240 104 C 330 104, 380 104, 484 104" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="104" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="108" fill="#fff">pin 25</text>
+<text x="558" y="108" fill="#ddd" font-size="12">GND</text>
+<text x="30" y="142">PLAY: one leg</text>
+<circle cx="240" cy="138" r="5" fill="#27ae60"/>
+<path d="M240 138 C 330 138, 380 138, 484 138" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="138" r="6" fill="#27ae60" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="142" fill="#fff">pin 28</text>
+<text x="558" y="142" fill="#ddd" font-size="12">GPIO25</text>
+<text x="30" y="176">PLAY: diagonal leg</text>
+<circle cx="240" cy="172" r="5" fill="#222"/>
+<path d="M240 172 C 330 172, 380 172, 484 172" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="172" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="176" fill="#fff">pin 30</text>
+<text x="558" y="176" fill="#ddd" font-size="12">GND</text>
+<text x="30" y="210">pitch: wiper</text>
+<circle cx="240" cy="206" r="5" fill="#8e44ad"/>
+<path d="M240 206 C 330 206, 380 206, 484 206" fill="none" stroke="#8e44ad" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="206" r="6" fill="#8e44ad" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="210" fill="#fff">pin 12</text>
+<text x="558" y="210" fill="#ddd" font-size="12">GPIO22</text>
+<text x="632" y="210" fill="#666" font-size="12">analog in</text>
+<text x="30" y="244">pitch: screen end</text>
+<circle cx="240" cy="240" r="5" fill="#d22"/>
+<path d="M240 240 C 330 240, 380 240, 484 240" fill="none" stroke="#d22" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="240" r="6" fill="#d22" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="244" fill="#fff">pin 1</text>
+<text x="558" y="244" fill="#ddd" font-size="12">3V3</text>
+<text x="632" y="244" fill="#666" font-size="12">shared with the sensor's VCC</text>
+<text x="30" y="278">pitch: your end</text>
+<circle cx="240" cy="274" r="5" fill="#222"/>
+<path d="M240 274 C 330 274, 380 274, 484 274" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="274" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="278" fill="#fff">pin 14</text>
+<text x="558" y="278" fill="#ddd" font-size="12">GND</text>
+<text x="20" y="326" fill="#555">Tact switches: use two diagonally opposite legs. Fader backwards? swap its two end wires.</text>
+</svg>

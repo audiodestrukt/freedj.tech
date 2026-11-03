@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 324" width="820" height="324" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13">
+<rect width="820" height="324" fill="#fff"/>
+<text x="20" y="26" font-size="15" font-weight="bold">Jog sensor harness: 5 wires</text>
+<rect x="20" y="46" width="220" height="184" rx="6" fill="#f3f3f3" stroke="#999"/>
+<text x="30" y="40" fill="#555">AS5600 board</text>
+<rect x="470" y="46" width="150" height="184" rx="6" fill="#333"/>
+<text x="470" y="40" fill="#555">P4 header</text>
+<text x="30" y="74">VCC</text>
+<circle cx="240" cy="70" r="5" fill="#d22"/>
+<path d="M240 70 C 330 70, 380 70, 484 70" fill="none" stroke="#d22" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="70" r="6" fill="#d22" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="74" fill="#fff">pin 1</text>
+<text x="558" y="74" fill="#ddd" font-size="12">3V3</text>
+<text x="30" y="108">GND</text>
+<circle cx="240" cy="104" r="5" fill="#222"/>
+<path d="M240 104 C 330 104, 380 104, 484 104" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="104" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="108" fill="#fff">pin 6</text>
+<text x="558" y="108" fill="#ddd" font-size="12">GND</text>
+<text x="30" y="142">SDA</text>
+<circle cx="240" cy="138" r="5" fill="#2471a3"/>
+<path d="M240 138 C 330 138, 380 138, 484 138" fill="none" stroke="#2471a3" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="138" r="6" fill="#2471a3" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="142" fill="#fff">pin 3</text>
+<text x="558" y="142" fill="#ddd" font-size="12">SDA·7</text>
+<text x="30" y="176">SCL</text>
+<circle cx="240" cy="172" r="5" fill="#d4ac0d"/>
+<path d="M240 172 C 330 172, 380 172, 484 172" fill="none" stroke="#d4ac0d" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="172" r="6" fill="#d4ac0d" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="176" fill="#fff">pin 5</text>
+<text x="558" y="176" fill="#ddd" font-size="12">SCL·8</text>
+<text x="30" y="210">DIR</text>
+<circle cx="240" cy="206" r="5" fill="#222"/>
+<path d="M240 206 C 330 206, 380 206, 484 206" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+<circle cx="484" cy="206" r="6" fill="#222" stroke="#ccc" stroke-width="2"/>
+<text x="498" y="210" fill="#fff">pin 9</text>
+<text x="558" y="210" fill="#ddd" font-size="12">GND</text>
+<text x="632" y="210" fill="#666" font-size="12">sets the direction</text>
+<text x="20" y="258" fill="#888">not connected: OUT, GPO</text>
+<text x="20" y="280" fill="#555">DIR must go to GND. Left floating, the jog reads noisy and can run backwards.</text>
+</svg>
