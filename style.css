@@ -1,3 +1,5 @@
-body { max-width: 680px; margin: 24px auto 60px; padding: 0 24px; line-height: 1.5; }
+body { margin: 24px 40px 60px; line-height: 1.5; }
 img, video { max-width: 100%; height: auto; display: block; margin: 8px 0; }
+video { max-width: 480px; width: 100%; }
 small { color: #555; }
+@media (max-width: 600px) { body { margin: 16px 18px 40px; } }
