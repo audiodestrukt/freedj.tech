@@ -1,155 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>freedj — an open-source DJ deck you can build</title>
-  <meta name="description" content="freedj: a small CDJ-style deck I'm building on an ESP32-P4, with a 3D-printed case and a real jog wheel. Open source: firmware, CAD and all.">
-  <meta property="og:title" content="freedj — an open-source DJ deck you can build">
-  <meta property="og:description" content="A small CDJ-style deck on an ESP32-P4. 3D-printed case, real jog, rekordbox sticks, Pro DJ Link sync. Open source.">
-  <meta property="og:image" content="https://freedj.tech/images/deck-hero.jpg">
-  <meta property="og:url" content="https://freedj.tech/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>freedj: build your own DJ deck</title>
+<meta name="description" content="A little CDJ-style deck you can build yourself: an ESP32-P4 board, a touch screen, a 3D printed case and a real jog wheel. Open source.">
+<meta property="og:title" content="freedj: build your own DJ deck">
+<meta property="og:description" content="A little CDJ-style deck you can build yourself: an ESP32-P4 board, a touch screen, a 3D printed case and a real jog wheel. Open source.">
+<meta property="og:image" content="https://freedj.tech/images/deck-hero.jpg">
+<meta property="og:url" content="https://freedj.tech/">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a class="brand" href="/">freedj</a>
-    <a href="#build">the deck</a>
-    <a href="#software">software</a>
-    <a href="#log">build log</a>
-    <a href="/faq/">faq</a>
-    <a href="https://github.com/audiodestrukt/freedj-esp">github</a>
-  </div>
-</nav>
+<h1>freedj: build your own DJ deck</h1>
 
-<main class="wrap">
+<p>This is a little CDJ-style player you can make yourself. It's a dev board you can buy off the
+shelf, a 4" touch screen, and a jog wheel on a couple of skateboard bearings, in a case you print.
+Plug in your rekordbox USB stick and it plays your tracks with the waveforms, beat grids and cues
+you already set up. It even syncs with Pioneer players over Pro DJ Link.</p>
 
-  <h1>freedj: a DJ deck you can build yourself.</h1>
-  <p>I'm building a small CDJ-style player. It's an ESP32-P4 board, a 4" touch screen, a jog
-    platter spinning on two skateboard bearings, and a 3D-printed case. Plug in a rekordbox
-    USB stick and play. It syncs with Pioneer players over Pro DJ Link.</p>
-  <p>Everything is open: the firmware, the CAD, and the notes on what broke along the way.</p>
-  <p class="sig">— Dan (<a href="https://audiodestrukt.com">audiodestrukt</a>)</p>
+<p>If you've got a 3D printer and you've ever plugged an Arduino into a computer, you can build one.</p>
 
-  <div class="pair">
-    <figure>
-      <img src="images/deck-hero.jpg" width="1100" height="1467"
-           alt="The freedj deck on a cluttered workbench: white 3D-printed case, black knurled jog platter, a small screen playing a track with a colour waveform, a USB stick plugged in at the back.">
-      <figcaption>the deck as it is now: printed case, rekordbox stick in the back</figcaption>
-    </figure>
-    <figure>
-      <video src="images/on-the-xdj.mp4" poster="images/on-the-xdj.jpg" width="720" height="1280"
-             controls muted loop playsinline preload="none"></video>
-      <figcaption>sitting on top of my XDJ-1000MK2 (tap for sound)</figcaption>
-    </figure>
-  </div>
+<img src="images/deck-hero.jpg" width="1100" height="1467" alt="The deck on my workbench: white printed case, black jog platter, screen playing a track.">
 
-  <h3>how it got here</h3>
-  <div class="tl">
-    <figure><img src="images/build-01-first-screen.jpg" width="700" height="933" loading="lazy" alt="ESP32-P4 dev board on the bench, jumper wires to a 4 inch screen showing a list of files."><figcaption>oct 29: first screen, jumper wires, a file list</figcaption></figure>
-    <figure><img src="images/build-02-varispeed.jpg" width="700" height="933" loading="lazy" alt="The screen playing house.mp3 at +6.46 % pitch with a blue scrolling waveform."><figcaption>oct 31: scrolling waveform and pitch</figcaption></figure>
-    <figure><img src="images/build-03-xdj-screen.jpg" width="700" height="933" loading="lazy" alt="The screen with an XDJ-style layout and rekordbox colour waveforms, a USB stick plugged into the dev board."><figcaption>oct 31: XDJ-style screen, rekordbox colour waveforms</figcaption></figure>
-    <figure><img src="images/build-04-in-the-case.jpg" width="700" height="933" loading="lazy" alt="The deck in its white printed case with the black jog platter, paused."><figcaption>oct 31: into the printed case</figcaption></figure>
-    <figure><img src="images/build-05-wiring.jpg" width="700" height="933" loading="lazy" alt="The case opened up: the dev board wired to the screen, with the AS5600 sensor board still in its bag."><figcaption>nov 1: opened up to fit the jog sensor</figcaption></figure>
-  </div>
+<h2>What you need</h2>
 
-  <hr>
+<ul>
+<li>A 3D printer. Anything with a bed around 256 mm will do the case in one piece.</li>
+<li>A Waveshare ESP32-P4 dev kit. This is the brains.</li>
+<li>A 4" SPI touch screen (the ST7796 kind, sold as MSP4031 or under brands like Hosyond).</li>
+<li>An AS5600 magnetic sensor board. It comes with the little magnet that goes in the jog.</li>
+<li>Two 608 skateboard bearings.</li>
+<li>Two panel-mount push buttons (CUE and PLAY) and a slide pot for pitch.</li>
+<li>Some jumper wires, a few screws and heat-set inserts.</li>
+<li>A soldering iron helps, but there are only a few joints.</li>
+</ul>
 
-  <section id="build">
-    <h2>what it does today</h2>
-    <ul class="check">
-      <li>plays WAV and MP3 from a rekordbox USB stick or an SD card</li>
-      <li>rekordbox colour waveforms, beat grids, hot cues A–H and memory cues</li>
-      <li>pitch ±6/10/16 % and WIDE, key lock (master tempo)</li>
-      <li>CDJ-style CUE, loops and beat loops, beat jump, quantize, slip, reverse</li>
-      <li>beat sync over Pro DJ Link: follows the tempo master, or takes master</li>
-      <li>real jog: a magnet in the shaft over an AS5600 sensor</li>
-      <li>works with a Numark DJ2Go, or a Pioneer XDJ-1000MK2 as a USB controller</li>
-      <li class="todo">build guide with off-the-shelf parts only (no custom boards)</li>
-      <li class="todo">playlists, titles and artists from rekordbox</li>
-      <li class="todo">two decks and a mixer in one box</li>
-    </ul>
+<p>No custom circuit boards. Everything is stuff you can order online.</p>
 
-    <h3>what's inside</h3>
-    <figure>
-      <img src="images/deck-render.jpg" width="1400" height="963" loading="lazy"
-           alt="CAD render of the deck design: grey case, jog platter, lit CUE and PLAY buttons, pitch fader, screen.">
-      <figcaption>the CAD model (build123d). Next version: lit buttons and a pitch fader</figcaption>
-    </figure>
-    <div class="pair">
-      <figure>
-        <img src="images/cutaway-jog.jpg" width="900" height="619" loading="lazy"
-             alt="Cutaway of the jog: the printed shaft through two bearings, a magnet in its tip just above the AS5600 sensor board.">
-        <figcaption>jog cutaway: printed shaft, two 608 bearings, magnet ~1 mm over the AS5600</figcaption>
-      </figure>
-      <figure>
-        <img src="images/cutaway-buttons.jpg" width="900" height="643" loading="lazy"
-             alt="Cutaway of the PLAY and CUE buttons: printed caps on tact switches, with green and amber light rings.">
-        <figcaption>PLAY / CUE cutaway: printed caps on tact switches, light rings optional</figcaption>
-      </figure>
-    </div>
+<h2>How it goes together</h2>
 
-    <h3>build one</h3>
-    <p>The first release will use only parts you can buy: the Waveshare ESP32-P4 dev kit, a 4"
-      SPI touch screen, an AS5600 board, two bearings, two panel buttons and a slide pot. Print the
-      case on any printer with a ~256 mm bed. About nine wires, no custom PCB.</p>
-    <p>The guide isn't written yet. The code and CAD are already public if you want to dig in:
-      <a href="https://github.com/audiodestrukt/freedj-esp">github.com/audiodestrukt/freedj-esp</a>.
-      More in the <a href="/faq/">FAQ</a>.</p>
-  </section>
+<ol>
+<li>Print the case, the base and the jog platter. Start with the flat version: it prints with no supports.</li>
+<li>Press the bearings in, push the platter's shaft through them, and glue the magnet into the end of the shaft.</li>
+<li>Screw the sensor board onto the base under the magnet, the screen in behind the top, and the dev board onto the base.</li>
+<li>Wire it up. It's about nine wires: the screen, the sensor, the two buttons and the pitch slider.</li>
+<li>Flash the firmware from your computer over USB.</li>
+<li>Plug in a USB stick and play.</li>
+</ol>
 
-  <hr>
+<p><b>Heads up:</b> the step-by-step guide with photos and a parts list with links isn't done yet.
+I'm working on it now. Everything that exists so far (code, CAD files, notes) is on GitHub if you want to
+get a head start: <a href="https://github.com/audiodestrukt/freedj-esp">github.com/audiodestrukt/freedj-esp</a>.
+Questions? Check the <a href="/faq/">FAQ</a>.</p>
 
-  <section id="software">
-    <h2>the software version</h2>
-    <p>Before the hardware there was <b>freedj-3000</b>: the same idea as software, written in Rust.
-      It runs on a Raspberry Pi 5, a Linux PC, and the iPad and iPhone as
-      <a href="https://apps.apple.com/app/id6807472453">OpenDeck DJ</a>. Same Pro DJ Link sync, plus
-      FLAC/AAC/OGG/AIFF and its own beat detection.
-      Source: <a href="https://github.com/audiodestrukt/freedj-3000">github.com/audiodestrukt/freedj-3000</a>.</p>
-  </section>
+<h2>What it does</h2>
 
-  <hr>
+<p>Plays WAV and MP3 off a rekordbox stick or SD card, with rekordbox's colour waveforms, beat grids and
+hot cues. Pitch and key lock, cue, loops, beat jump, slip, reverse, and beat sync with other players.
+You can also hook up a Numark DJ2Go, or even an XDJ-1000MK2 over USB:</p>
 
-  <section id="log">
-    <h2>build log</h2>
-    <p class="muted">Write-ups on the audiodestrukt blog, oldest first.</p>
-    <ul class="log">
-      <li><span class="d">2026-10-04</span><a href="https://audiodestrukt.com/blog/posts/cloning-an-xdj-1000.html">I cloned an XDJ-1000 and it runs on a Raspberry Pi</a></li>
-      <li><span class="d">2026-10-14</span><a href="https://audiodestrukt.com/blog/posts/pi-vs-xdj-1000-performance.html">Is an $80 Raspberry Pi faster than an XDJ-1000?</a></li>
-      <li><span class="d">2026-10-29</span><a href="https://audiodestrukt.com/blog/posts/esp32-deck-waveform-starved-the-dac.html">The waveform was stealing my audio: debugging an ESP32-P4 DJ deck</a></li>
-      <li><span class="d">2026-10-30</span><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-status.html">ESP32-P4 DJ deck: where it stands, and how much CPU is left</a></li>
-      <li><span class="d">2026-10-31</span><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-beat-sync.html">Beat sync over Pro DJ Link, with rekordbox's beat grids</a></li>
-      <li><span class="d">2026-10-31</span><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-cues-loops-master.html">Cues, loops, slip, and becoming the tempo master</a></li>
-      <li><span class="d">2026-10-31</span><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-xdj-screen-usb.html">An XDJ-style screen, a lying frame counter, and four USB ports that were really three</a></li>
-    </ul>
-  </section>
+<video src="images/on-the-xdj.mp4" poster="images/on-the-xdj.jpg" width="720" height="1280" controls muted loop playsinline preload="none"></video>
 
-  <hr>
+<p>Coming later: playlists and track names from rekordbox, lit buttons, and a two deck version with a mixer.</p>
 
-  <section>
-    <h2>help out</h2>
-    <ul class="plain">
-      <li>got a CDJ-3000? <a href="https://github.com/audiodestrukt/freedj-3000/blob/main/docs/testing/cdj-3000-interop.md">ten minutes with this script</a> would tell us if sync works</li>
-      <li>map a controller you own, remix the case, or send a fix</li>
-      <li>found a bug? <a href="https://github.com/audiodestrukt/freedj-esp/issues">open an issue</a></li>
-    </ul>
-  </section>
+<h2>How mine came together</h2>
 
-</main>
+<p>Oct 29, first time the screen came up. Just jumper wires and a list of files.</p>
+<img src="images/build-01-first-screen.jpg" width="700" height="933" alt="Dev board and screen on jumper wires showing a file list.">
 
-<footer>
-  <div class="wrap">
-    <p>Code under the GPL, hardware under CERN-OHL-S. Build it, change it, share it.</p>
-    <p>freedj™ and audiodestrukt™ are Dan Newcome's trademarks and aren't covered by those licences:
-      if you make your own version, give it its own name. "Based on freedj" is fine.</p>
-    <p>Not affiliated with Pioneer DJ or AlphaTheta. CDJ, XDJ, rekordbox and Pro DJ Link are their trademarks.</p>
-  </div>
-</footer>
+<p>A couple of days later it had a scrolling waveform and a pitch control.</p>
+<img src="images/build-02-varispeed.jpg" width="700" height="933" alt="Screen playing a track with a blue scrolling waveform.">
+
+<p>Then I redid the screen to look like the XDJ's, with the rekordbox colour waveforms.</p>
+<img src="images/build-03-xdj-screen.jpg" width="700" height="933" alt="XDJ style screen layout with colour waveforms.">
+
+<p>Into the printed case.</p>
+<img src="images/build-04-in-the-case.jpg" width="700" height="933" alt="The deck in its white printed case.">
+
+<p>And opened back up to put the jog sensor in (it's still in the bag on the right).</p>
+<img src="images/build-05-wiring.jpg" width="700" height="933" alt="Case opened up with the dev board wired in.">
+
+<p>If you want the nerdy details, I write them up on my blog:</p>
+<ul>
+<li><a href="https://audiodestrukt.com/blog/posts/esp32-deck-waveform-starved-the-dac.html">The waveform was stealing my audio</a></li>
+<li><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-beat-sync.html">Beat sync over Pro DJ Link</a></li>
+<li><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-cues-loops-master.html">Cues, loops, slip, and becoming the tempo master</a></li>
+<li><a href="https://audiodestrukt.com/blog/posts/esp32-p4-deck-xdj-screen-usb.html">An XDJ style screen and four USB ports that were really three</a></li>
+</ul>
+
+<h2>Don't want to build hardware?</h2>
+
+<p>There's a software version too, called freedj-3000. It runs on a Raspberry Pi, and on iPad and
+iPhone as <a href="https://apps.apple.com/app/id6807472453">OpenDeck DJ</a>.
+Code: <a href="https://github.com/audiodestrukt/freedj-3000">github.com/audiodestrukt/freedj-3000</a>.
+(<a href="https://audiodestrukt.com/blog/posts/cloning-an-xdj-1000.html">How that started.</a>)</p>
+
+<h2>Help out</h2>
+
+<p>Build one and send me a photo. If something in the instructions is confusing, tell me. If you have a
+CDJ-3000, I'd love to know if sync works with it
+(<a href="https://github.com/audiodestrukt/freedj-3000/blob/main/docs/testing/cdj-3000-interop.md">test script</a>).
+Bugs and ideas go in <a href="https://github.com/audiodestrukt/freedj-esp/issues">GitHub issues</a>.</p>
+
+<p>- Dan (<a href="https://audiodestrukt.com">audiodestrukt</a>)</p>
+
+<hr>
+<p><small>The code is GPL and the hardware files are CERN-OHL-S, so build it, change it, share it. The
+freedj name is mine though, so if you make your own version please call it something else. Not
+affiliated with Pioneer DJ / AlphaTheta.</small></p>
 
 </body>
 </html>
